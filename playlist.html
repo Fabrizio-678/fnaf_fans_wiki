@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>FNaF Fans Wiki</title>
+		<meta charset="utf-8">
+		<link href="estilos.css" rel="stylesheet" type="text/css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+		<link rel="icon" href="imagenes/favicon/favicon.ico">
+		<!-- Start WOWSlider.com HEAD section -->
+		<link rel="stylesheet" type="text/css" href="engine1/style.css" />
+		<script type="text/javascript" src="engine1/jquery.js"></script>
+		<!-- End WOWSlider.com HEAD section -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	
+	<body>
+		<header>
+			<div class="logo">
+				<a href="index.html" title="Inicio">
+					<img src="imagenes/logo/logo2.png" alt="Logo">
+				</a>
+			</div>
+			<nav class="navbar navbar-expand-lg">
+				<div class="container-fluid">
+				    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					  <span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-evenly">
+							<li class="nav-item dropdown">
+							  <a class="nav-link dropdown-toggle w-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Juegos
+							  </a>
+							  <ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="fnaf1.html">Five Nights at Freddy's</a></li>
+								<li><a class="dropdown-item" href="fnaf2.html">Five Nights at Freddy's 2</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's 3</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's 4</a></li>
+								<li><a class="dropdown-item" href="#">FNaF World</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Sister Location</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Pizzeria Simulator</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Ultimate Custom Night</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Help Wanted</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's AR Special Delivery</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Security Breach</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Help Wanted 2</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Into the Pit</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Secret of the Mimic</a></li>
+							  </ul>
+							</li>
+							<li class="nav-item dropdown">
+							  <a class="nav-link dropdown-toggle w-100" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								DLCs
+							  </a>
+							  <ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Help Wanted - Curse of Dreadbear</a></li>
+								<li><a class="dropdown-item" href="#">Five Nights at Freddy's: Security Breach - Ruin</a></li>
+							  </ul>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link w-100" href="historia.html">Historia</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link w-100" href="galeria.html">Galería</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link w-100" href="animatronicos.html">Animatrónicos</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link w-100" href="nosotros.html">Nosotros</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link w-100" href="playlist.html">Playlist</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		
+		<main class="index playlist">
+		<div id="particles-js"></div>
+			<section class="reproductor-musica">
+			
+				<div class="selector-musica">
+					<label for="musica-input">Agregar Canciones +</label>
+					<input id="musica-input" type="file" multiple accept="audio/*">
+				</div>
+				
+				<div class="playlist1">
+					<h2>Mi Playlist</h2>
+					<ul id="playlist-container">
+					</ul>
+				</div>
+				
+				<h1>Título</h1>
+				<p>Nombre</p>
+				<audio id="cancion">
+					<source src="" type="audio/mpeg"/>
+				</audio>
+				<input type="range" value="0" id="progreso"/>
+				<div class="controles">
+					<button class="aleatorio control">
+						<i class="bi bi-shuffle" id="iconoAleatorio"></i>
+					</button>
+					<button class="atras control">
+						<i class="bi bi-rewind-fill"></i>
+					</button>
+					<button class="boton-reproducir-pausar iconoControl">
+						<i class="bi bi-play-fill" id="iconoControl"></i>
+					</button>
+					<button class="adelante control">
+						<i class="bi bi-fast-forward-fill"></i>
+					</button>
+					<button class="repetir control">
+						<i class="bi bi-repeat" id="iconoRepetir"></i>
+					</button>
+				</div>
+			</section>
+		</main>
+		
+		<footer>
+			<div class="logo_alt">
+				<img src="imagenes/logo/logo_alt.png" alt="Logo Alterno">
+			</div>
+			<div class="contacto">
+				<p>Teléfono: 1-888-FAZ-FAZBEAR</p>
+				<a href="mailto:fazbear@gmail.com" title="Contáctenos">
+					Mail: "fazbear@gmail.com"
+				</a>
+			</div>
+			<div class="redes">
+				<a href="https://www.instagram.com" title="Instagram" target="_blank">
+					<img src="imagenes/redes/instagram.png" alt="Logo Instagram">
+				</a>
+				<a href="https://www.facebook.com" title="Facebook" target="_blank">
+					<img src="imagenes/redes/facebook.png" alt="Logo Facebook">
+				</a>
+				<a href="https://x.com" title="X" target="_blank">
+					<img src="imagenes/redes/x.png" alt="Logo X">
+				</a>
+			</div>
+		</footer>
+		
+		<video id="transition-video" src="transition.mp4" preload="auto"></video>
+		<script src="script.js"></script>
+		<script src="particles/particles.min.js"></script>
+		<script src="particles/app.js"></script>
+		<script src="app.js"></script>
+		<script src="header.js"></script>
+	</body>
+</html>
