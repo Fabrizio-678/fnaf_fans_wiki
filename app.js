@@ -20,22 +20,22 @@ let canciones = [
 	{
         titulo: "Five Nights at Freddy's",
         nombre: "The Living Tombstone",
-        fuente: "/music/fnaf_tlt.mp3"
+        fuente: "music/fnaf_tlt.mp3"
     },
     {
         titulo: "It's Been So Long",
         nombre: "The Living Tombstone",
-        fuente: "/music/ibsl.mp3"
+        fuente: "music/ibsl.mp3"
     },
     {
         titulo: "Join Us for a Bite (con Andrea Storm Kaden)",
         nombre: "JT Music",
-        fuente: "/music/jufb.mp3"
+        fuente: "music/jufb.mp3"
     },
     {
         titulo: "Bellow the Surface",
         nombre: "Griffinilla",
-        fuente: "/music/bts.mp3"
+        fuente: "music/bts.mp3"
     }
 ];
 let indiceCancionActual = 0;
