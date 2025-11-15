@@ -14,16 +14,40 @@ const botonRepetir = document.querySelector('.controles button.repetir');
 
 const playlistContainer = document.getElementById("playlist-container");
 
-let canciones = [];
+const volumen = document.getElementById("volumen");
+
+let canciones = [
+	{
+        titulo: "Five Nights at Freddy's",
+        nombre: "The Living Tombstone",
+        fuente: "music/fnaf_tlt.mp3"
+    },
+    {
+        titulo: "It's Been So Long",
+        nombre: "The Living Tombstone",
+        fuente: "music/ibsl.mp3"
+    },
+    {
+        titulo: "Join Us for a Bite (con Andrea Storm Kaden)",
+        nombre: "JT Music",
+        fuente: "music/jufb.mp3"
+    },
+    {
+        titulo: "Bellow the Surface",
+        nombre: "Griffinilla",
+        fuente: "music/bts.mp3"
+    }
+];
 let indiceCancionActual = 0;
 let modoAleatorio = false;
+let modoRepetir = false;
 
-document.getElementById("musica-input").addListener("change", function(e){
+document.getElementById("musica-input").addEventListener("change", function(e){
 	const files = Array.from(e.target.files);
 	
 	files.forEach(file => {
 		const url = URL.createObjectURL(file);
-		const nombreArchivo = file.name.replace(/\.[^/.]+$, "");
+		const nombreArchivo = file.name.replace(/\.[^/.]+$/, "");
 		
 		canciones.push({
 			titulo: nombreArchivo,
@@ -32,33 +56,38 @@ document.getElementById("musica-input").addListener("change", function(e){
 		});
 	});
 	
+	// Actualizar playlist siempre
 	actualizarPlaylist();
-	if(canciones.length === files.length) {
+
+	// SI NO hay nada reproduciéndose, inicializa en la 1° canción
+	if (!cancion.src || cancion.src === "") {
+		indiceCancionActual = 0;
 		actualizarInfoCancion();
 	}
 });
 
 function actualizarPlaylist() {
-	playlistContainer.innerHTML = "";
-	canciones.forEach((cancionItem, Index) => {
-		const li = document.createElement("li");
-		li.textContent = "${cancionItem.titulo} - ${cancionItem.nombre}"
-		
-		li.onclick = () =>{
-			indiceCancionActual = index;
-			actualizarInfoCancion();
-			reproducirCancion();
-		}
-		
-		if(index === indiceCancionActual) {
-			li.classList.add("active");
-		}
-		
-		playlistContainer.appendChild("li");
-	})
+    playlistContainer.innerHTML = "";
+    
+    canciones.forEach((cancionItem, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${cancionItem.titulo} - ${cancionItem.nombre}`;
+        
+        li.onclick = () => {
+            indiceCancionActual = index;
+            actualizarInfoCancion();
+            reproducirCancion();
+        };
+
+        if (index === indiceCancionActual) {
+            li.classList.add("active");
+        }
+
+        playlistContainer.appendChild(li);
+    });
 }
 
-const canciones = [
+/*const canciones = [
     {
         titulo:'A Year Ago',
         nombre:'NEFFEX',
@@ -84,14 +113,13 @@ const canciones = [
         nombre: "NEFFEX",
         fuente: "music/Play Dead - NEFFEX.mp3",
     },
-];
-
-let indiceCancionActual = 0;
+];*/
 
 function actualizarInfoCancion(){
     tituloCancion.textContent = canciones[indiceCancionActual].titulo;
     nombreArtista.textContent = canciones[indiceCancionActual].nombre;
     cancion.src = canciones[indiceCancionActual].fuente;
+	cancion.loop = modoRepetir;
 	actualizarPlaylist();
 };
 
@@ -122,11 +150,11 @@ function pausarCancion(){
     inconoControl.classList.add('bi-play-fill')
 }
 
-cancion.addEventListener('timeupdate', function(){
+/*cancion.addEventListener('timeupdate', function(){
     if(!cancion.paused){
         progreso.value = cancion.currentTime;
     }
-});
+});*/
 
 cancion.addEventListener('timeupdate', function(){
     if(!cancion.paused){
@@ -135,8 +163,14 @@ cancion.addEventListener('timeupdate', function(){
 });
 
 cancion.addEventListener('ended', function(){
+	if(modoRepetir){
+		cancion.currentTime = 0;
+		reproducirCancion();
+		return;
+	}
+	
     if(modoAleatorio) {
-		indiceCancionActual = obtenerIndiceActual();
+		indiceCancionActual = obtenerIndiceAleatorio();
 	} else{
 		indiceCancionActual = (indiceCancionActual + 1) % canciones.length;
 	}
@@ -144,6 +178,14 @@ cancion.addEventListener('ended', function(){
 	actualizarInfoCancion();
 	reproducirCancion();
 });
+
+function obtenerIndiceAleatorio() {
+	let nuevoIndice;
+	do{
+		nuevoIndice = Math.floor(Math.random() * canciones.length);
+	} while(nuevoIndice === indiceCancionActual && canciones.length > 1);
+	return nuevoIndice;
+}
 
 progreso.addEventListener('input', function(){
     cancion.currentTime = progreso.value;
@@ -154,25 +196,68 @@ progreso.addEventListener('change', ()=>{
 });
 
 botonAdelante.addEventListener('click', function(){
-    indiceCancionActual = (indiceCancionActual + 1) % canciones.length;
+	if(modoRepetir){
+		cancion.currentTime = 0;
+		reproducirCancion();
+		return;
+	}
+	
+	if(modoAleatorio){
+		indiceCancionActual = obtenerIndiceAleatorio();
+	} else{
+		indiceCancionActual = (indiceCancionActual + 1) % canciones.length;
+	}
+	
     actualizarInfoCancion();
     reproducirCancion();
 });
 
 botonAtras.addEventListener('click', function(){
-    indiceCancionActual = (indiceCancionActual - 1 + canciones.length) % canciones.length;
+	if(modoRepetir){
+		cancion.currentTime = 0;
+		reproducirCancion();
+		return;
+	}
+	
+	if(modoAleatorio){
+		indiceCancionActual = obtenerIndiceAleatorio();
+	} else{
+		indiceCancionActual = (indiceCancionActual - 1 + canciones.length) % canciones.length; //A
+	}
+    
     actualizarInfoCancion();
     reproducirCancion();
 });
 
 botonAleatorio.addEventListener('click', function(){
-	modoAleatorio = !modoAleatorio;
+	if(modoAleatorio){
+		modoAleatorio = false;
+	} else{
+		modoAleatorio = true;
+		modoRepetir = false;
+		botonRepetir.classList.remove("active");
+	}
+	
     botonAleatorio.classList.toggle("active");
+	cancion.loop = modoRepetir;
 });
 
 botonRepetir.addEventListener('click', function(){
-    botonRepetir.classList.toggle("active");
+	if(modoRepetir){
+		modoRepetir = false;
+	} else{
+		modoRepetir = true;
+		modoAleatorio = false;
+		botonAleatorio.classList.remove("active");
+	}
 	
+    botonRepetir.classList.toggle("active");
+	cancion.loop = modoRepetir;
 });
 
+volumen.addEventListener("input", () => {
+    cancion.volume = volumen.value;
+});
+
+actualizarPlaylist();
 actualizarInfoCancion();

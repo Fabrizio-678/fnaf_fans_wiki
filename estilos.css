@@ -183,6 +183,10 @@ nav a:hover{
 	text-shadow:2px 2px 3px #8f2222;
 }
 
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 /*Main*/
 
 main{
@@ -760,9 +764,36 @@ footer{
     transform: scale(1.4);
 }
 
-.controles .aleatroio.active,
+.controles .aleatorio.active,
 .controles .repetir.active{
 	background:rgba(165, 165, 165, 0.6);
+}
+
+/*Volumen de la Canción*/
+
+.control-volumen {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#volumen {
+    width: 100%;
+    appearance: none;
+    height: 7px;
+    background: rgba(165, 165, 165, 0.4);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#volumen::-webkit-slider-thumb {
+    appearance: none;
+    background: rgba(165, 165, 165, 0.9);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
 }
 
 /*Galería*/
@@ -793,62 +824,113 @@ footer{
     transform: scale(1.02);
 }
 
-/* Lightbox overlay */
+/* Lightbox */
 .lightbox {
-    display: none;
-    position: fixed;
-    z-index: 1055;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    align-items: center;
-    justify-content: center;
+  display: none;
+  position: fixed;
+  z-index: 1055;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  opacity: 0;
+  transition: opacity .3s ease;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .lightbox.active {
-    display: flex;
+  display: flex;
+  opacity: 1;
 }
 
+/* Efecto de zoom-in al abrir */
 .lightbox img {
-  width: auto;
-  height: auto;
   max-width: 90%;
-  max-height: 80vh;
+  max-height: 75vh;
+  object-fit: contain;
   border-radius: 0.5rem;
-  object-fit: contain; /* ✅ mantiene la proporción sin recortar */
+
+  /* Animación */
+  transform: scale(.8);
+  opacity: 0;
+  transition: transform .35s ease, opacity .35s ease;
+}
+.lightbox img.loaded {
+  transform: scale(1);
+  opacity: 1;
 }
 
+/* Slide animación */
+.slide-left {
+  animation: slideLeft .35s ease forwards;
+}
+.slide-right {
+  animation: slideRight .35s ease forwards;
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%) scale(1); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(-100%) scale(1); opacity: 0; }
+  to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* Contenedor de thumbnails */
+.thumbnails {
+  display: flex;
+  gap: .5rem;
+  margin-top: 1rem;
+  overflow-x: auto;
+  padding-bottom: .5rem;
+}
+.thumbnails img {
+  height: 70px;
+  cursor: pointer;
+  opacity: .6;
+  border-radius: 5px;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.thumbnails img:hover,
+.thumbnails img.active-thumb {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Flechas */
 .lightbox .controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 2rem;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 9999;   /* 👈 fuerza a quedar arriba */
 }
 
 .lightbox button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: 0.3s;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  transition: transform .2s ease;
+  z-index: 10000;   /* 👈 por si la imagen tiene z-index superior */
 }
 
 .lightbox button:hover {
-    color: #0d6efd;
+  transform: scale(1.2);
+  color: #0d6efd;
 }
 
 .close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 2rem;
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 2.5rem;
+  cursor: pointer;
 }
 
 /*Responsive*/
