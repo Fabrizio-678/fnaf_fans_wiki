@@ -1044,6 +1044,22 @@ footer{
 					font-size:22px;
 					line-height:34px;
 				}
+				
+			.anim1{
+				width:100%;
+				padding:3%;
+			}
+			
+				/*Dentro de .anim1*/
+				
+				.a1text p{
+					font-size:22px;
+					line-height:34px;
+				}
+				
+				.a1img{
+					width:60%;
+				}
 	
 	.nosotros{
 		flex-direction:column;
@@ -1060,6 +1076,18 @@ footer{
 			width:100%;
 			margin-bottom:20px;
 		}
+	
+	.ratio{
+		margin-bottom:15px;
+	}
+	
+	.titulo_animatronicos{
+		font-size:27px;
+	}
+	
+	.reproductor-musica{
+		margin-bottom:20px;
+	}
 	
 	footer{
 		flex-direction:column;
