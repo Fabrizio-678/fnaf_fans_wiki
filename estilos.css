@@ -81,7 +81,7 @@ li{
 	font-size:17px;
 	line-height:23px;
 	margin-bottom:15px;
-	color:#5669bf;
+	color:#1d70de;/*#5669bf*/
 	position:relative;
 	z-index:99;
 }
@@ -328,6 +328,14 @@ main{
 		
 		.w-76{
 			width:76%;
+		}
+		/*-*/
+		.w-10{
+			width:10%;
+		}
+		
+		.w-86{
+			width:86%;
 		}
 
 .mecanicas{
